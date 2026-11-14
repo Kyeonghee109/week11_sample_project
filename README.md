@@ -80,3 +80,17 @@ useState는 초기에 courses라는 지금 상태값을 만들어서 initialCour
 onClick로 onDelete를 course.id와 함께 불러서 해당 아이디를 삭제하도록 하였다.
 
 ## Step3: Customizing
+- 과목 5개 변경: courses.js에서 과목 5개로 조건에 맞게 변경
+Programming Studio → Computer Architecture
+Coding Studio → Calculus II
+Web Service Development → Discrete Mathematics
+Software Engineering → Introduction to AI Convergence
+- 제목·설명 변경: App.jsx와 index.html에서 바꿨다.
+OPEN SOURCE STUDIO · WEEK 11 → 26-2 My Course Manager · WEEK 11
+React Component, Props & State Practice → 26-2학기 수업 관리 프로그램
+OSS Week 11 · React → 26-2 My Course Manager · WEEK 11
+OSS Course Manager → 26-2 My Course Manager
+- CSS 3곳 변경: App.css에서 바꿨다.
+.hero h1 글자 크기: clamp(30px,4vw,44px) → clamp(40px,4vw,44px)
+.stat strong.green 색: #16856c → #19b792
+.panel 모서리: 18px → 20px
