@@ -40,3 +40,43 @@ npm run dev
 - 브라우저 새로고침 시 데이터가 초기화되는 이유는? (DB/localStorage 없음)
 
 > 교육 목적의 로컬 State 앱입니다. 서버 API 및 데이터베이스는 사용하지 않습니다.
+
+## Step2: Source Code Exploration
+
+1. Project Structure: 주요 파일 3개의 역할
+    - CourseList.jsx : 초기 배열을 useState로 관리하고 handleDelete가 삭제 기능을 한다. 그리고 map으로 CourseItem를 반복해서 그린다.
+    - CourseItem.jsx : 과목 하나를 그린다.
+    - courses.js : 초기 데이터를 저장한다.
+2. Component & Props: CourseList와 CourseItem의 관계 및 Props 전달 방식
+CourseList가 CourseItem의 부모 컴포넌트로 CourseList에서 map으로 CourseItem을 하나씩 불러와 과목을 하나씩 그리게 한다. CourseItem은 props로 course, onDelete, onToggle 이렇게 데이터와 함수를 받게 된다.
+3. State & Event: useState를 이용한 상태 관리 및 삭제 버튼의 동작 원리
+useState는 초기에 courses라는 지금 상태값을 만들어서 initialCourses를 처음 값으로 넣어두고 setCourses로 그 값을 바꾸는 함수를 만들어서 이 함수가 실행될때마다 react가 바뀐 값을 화면에 실행되도록 한다.
+클릭하게 되면 onDelete가 실행되고 handleDelete함수로 인해 setCourses함수가 실행되어 자료 값이 바뀌고 화면이 갱신된다.
+4. Code Analysis: 주요 코드 2개(각 5~15줄)를 선택하여 동작 원리 설명
+```jsx
+// [제공] 초기 배열을 useState로 관리합니다.
+  const [courses, setCourses] = useState(initialCourses);
+  const [newName, setNewName] = useState('');
+
+  // [제공] 삭제 기능: filter로 새 배열을 만들어 업데이트합니다.
+  function handleDelete(id) {
+    if (!window.confirm('이 과목을 삭제하시겠습니까?')) return;
+    setCourses(previous => previous.filter(course => course.id !== id));
+  } 
+  ```
+- useState는 자료의 처음상태를 저장하고 값을 바꾸는 함수도 생성하는 역할을 한다.
+- filter로 삭제하지 않을 데이터만 골라서 새 배열을 만든다.
+- previous로 변경되기 전의 현재 과목 목록을 받는다.
+
+```jsx
+<button
+    className="btn danger"
+    type="button"
+    onClick={() => onDelete(course.id)}
+    >
+    Delete
+    </button>
+```
+onClick로 onDelete를 course.id와 함께 불러서 해당 아이디를 삭제하도록 하였다.
+
+## Step3: Customizing
